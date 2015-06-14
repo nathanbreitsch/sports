@@ -10,10 +10,15 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
-@app.route('/api/getAthletes' methods=['GET'])
+@app.route('/api/getAthletes', methods=['GET'])
 def getAthletes():
     athletes = session.query(Athlete).all()
     return jsonify(athletes = [a.serialize for a in athletes])
+
+@app.route('/api/getAthleteById' methods=['POST']):
+def queryAthletes():
+    athletes = session.query(Athletes)
+
 
 @app.route('/api/getTeams')
 def getTeams():
